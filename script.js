@@ -4,6 +4,19 @@ let input = document.querySelector("input")
 let main = document.querySelector(".main")
 let addButton = document.querySelector(".add-button")
 
+const saveToTheLocalStorage = () => {
+    const StringTodos = JSON.stringify(todos)
+    localStorage.setItem("todos", StringTodos)
+}
+
+const pullFromTheLocalStorage = () =>{
+    const savedData = localStorage.getItem("todos")
+    if(savedData){
+        todos = JSON.parse(savedData)
+        render()
+    }
+}
+
 const createTask = () => {
     let text = input.value.trim()
     if(text === "") return;
@@ -14,12 +27,14 @@ const createTask = () => {
         completed: false
     }
     todos.push(taskObj)
+    saveToTheLocalStorage()
     input.value = "";
     render();
 }
 
 const deleteTask = (id) =>{
     todos = todos.filter(ele => ele.id !== id);
+    saveToTheLocalStorage()
     render()
 }
 
@@ -32,6 +47,7 @@ const updateTask = (id) =>{
             return ele
         }
     })
+    saveToTheLocalStorage()
     render()
 }
 
@@ -68,3 +84,5 @@ const render = () => {
 
 }
 addButton.addEventListener("click",createTask)
+
+pullFromTheLocalStorage()

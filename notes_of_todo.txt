@@ -55,3 +55,19 @@
         -- browser can now render it and is visible        
 
 -- addEventListener to add button to add a task
+
+
+-- local storage add
+    -- local storage saves as key-value pair
+    -- only strings so
+    -- todos (array of objects)
+        ⬇
+        Convert to string (JSON.stringify())
+        ⬇
+        Save to localStorage
+        ⬇
+        On page load → get it back
+        ⬇
+        Convert back to array (JSON.parse())
+        ⬇
+        Render()
